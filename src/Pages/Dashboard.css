@@ -1,0 +1,31 @@
+
+.dashboard-container {
+    display: flex;
+}
+
+.left {
+    flex: 1;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+}
+
+.right {
+    flex: 1;
+    padding: 20px;
+}
+
+.table-container {
+    @apply w-full mt-10 p-6 bg-white rounded-lg shadow-md;
+}
+
+.table {
+    @apply w-full border-collapse;
+}
+
+.table th, .table td {
+    @apply border border-gray-300 px-4 py-2 text-left;
+}
+
+.table th {
+    @apply bg-green-100 font-bold;
+}
