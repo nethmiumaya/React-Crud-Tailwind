@@ -1,24 +1,13 @@
-// import {useContext} from "react";
-// import {CustomerContext} from "../store/CustomerProvider";
-// import {Customer} from "../model/Customer.ts";
-//
-// export function Dashboard() {
-//
-//     const [customers, dispatch] = useContext(CustomerContext);
-//     return (
-//         <>
-//             Dashboard
-//             {customers.map((customer: Customer) => (<div key={customer.email}>{customer.name + ' '+ customer.email + ' '+ customer.phone }</div>))}
-//         </>
-//     );
-// }
 import { useContext } from "react";
 import { CustomerContext } from "../store/CustomerProvider";
+import { ItemContext } from "../store/ItemProvider";
 import { Customer } from "../model/Customer.ts";
+import { Item } from "../model/Item.ts";
 import './Dashboard.css';
 
 export function Dashboard() {
-    const [customers, dispatch] = useContext(CustomerContext);
+    const [customers] = useContext(CustomerContext);
+    const [items] = useContext(ItemContext);
 
     return (
         <div className="dashboard-container">
@@ -46,7 +35,27 @@ export function Dashboard() {
                 </div>
             </div>
             <div className="right">
-                {/* Other content can go here */}
+                <h2 className="form-header">Item Details</h2>
+                <div className="table-container">
+                    <table className="table">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {items.map((item: Item) => (
+                            <tr key={item.name}>
+                                <td>{item.name}</td>
+                                <td>{item.description}</td>
+                                <td>{item.price}</td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     );

@@ -1,7 +1,13 @@
+.container {
+    @apply flex;
+}
+
 .left {
-    flex: 1;
-    padding: 20px;
-    border-right: 1px solid #ccc;
+    @apply flex-1 p-5 border-r border-gray-300;
+}
+
+.right {
+    @apply flex-1 p-5;
 }
 
 .form-container {
@@ -17,5 +23,5 @@
 }
 
 .form-button {
-    @apply w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700;
+    @apply w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700;
 }

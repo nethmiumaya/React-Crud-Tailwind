@@ -1,0 +1,27 @@
+.container {
+    @apply flex;
+}
+
+.left {
+    @apply flex-1 p-5 border-r border-gray-300;
+}
+
+.right {
+    @apply flex-1 p-5;
+}
+
+.form-container {
+    @apply max-w-md mt-2.5 p-5 bg-white rounded-lg shadow-md;
+}
+
+.form-header {
+    @apply text-2xl font-bold mb-4;
+}
+
+.form-input {
+    @apply w-full p-2 mb-4 border border-gray-300 rounded-md;
+}
+
+.form-button {
+    @apply w-full bg-green-600 text-white py-2 rounded-md transition-colors duration-300 cursor-pointer hover:bg-green-700;
+}
