@@ -1,16 +1,16 @@
 import { useNavigate } from "react-router";
-import { useContext, useState } from "react";
-import { Customer } from "../model/Customer.ts";
-import { Item } from "../model/Item.ts";
-import { Modal } from "../component/Modal.tsx";
-import { CustomerContext } from "../store/CustomerProvider.tsx";
-import { ItemContext } from "../store/ItemProvider.tsx";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Customer } from "../model/Customer";
+import { Item } from "../model/Item";
+import { Modal } from "../component/Modal";
 import './Add.css';
+import {addCustomer} from "../reducers/CustomerSlice.ts";
+import {addItem} from "../reducers/ItemSlice.ts";
 
 export function Add() {
     const navigate = useNavigate();
-    const [customers, customerDispatch] = useContext(CustomerContext);
-    const [items, itemDispatch] = useContext(ItemContext);
+    const dispatch = useDispatch();
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -22,13 +22,13 @@ export function Add() {
 
     function handleCustomerSubmit() {
         const newCustomer = new Customer(name, email, phone);
-        customerDispatch({ type: 'ADD_CUSTOMER', payload: newCustomer });
+        dispatch(addCustomer(newCustomer));
         navigate('/');
     }
 
     function handleItemSubmit() {
         const newItem = new Item(itemName, itemDescription, itemPrice);
-        itemDispatch({ type: 'ADD_ITEM', payload: newItem });
+        dispatch(addItem(newItem));
         setItemName("");
         setItemDescription("");
         setItemPrice("");

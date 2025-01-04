@@ -1,12 +1,12 @@
 import './App.css';
 import { createBrowserRouter, RouterProvider } from "react-router";
-import { CustomerProvider } from "./store/CustomerProvider.tsx";
-import { ItemProvider } from "./store/ItemProvider.tsx";
-import { RootLayout } from "./component/RootLayout.tsx";
-import { Dashboard } from "./Pages/Dashboard.tsx";
-import { Add } from "./Pages/Add.tsx";
-import { Delete } from "./Pages/Delete.tsx";
-import { Update } from "./Pages/Update.tsx";
+import { Provider } from "react-redux";
+import { RootLayout } from "./component/RootLayout";
+import { Dashboard } from "./Pages/Dashboard";
+import { Add } from "./Pages/Add";
+import { Delete } from "./Pages/Delete";
+import { Update } from "./Pages/Update";
+import store from "./store/store";
 
 function App() {
     const routes = createBrowserRouter([
@@ -23,13 +23,9 @@ function App() {
     ]);
 
     return (
-        <>
-            <CustomerProvider>
-                <ItemProvider>
-                    <RouterProvider router={routes} />
-                </ItemProvider>
-            </CustomerProvider>
-        </>
+        <Provider store={store}>
+            <RouterProvider router={routes} />
+        </Provider>
     );
 }
 

@@ -1,13 +1,12 @@
-import { useContext } from "react";
-import { CustomerContext } from "../store/CustomerProvider";
-import { ItemContext } from "../store/ItemProvider";
-import { Customer } from "../model/Customer.ts";
-import { Item } from "../model/Item.ts";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import { Customer } from "../model/Customer";
+import { Item } from "../model/Item";
 import './Dashboard.css';
 
 export function Dashboard() {
-    const [customers] = useContext(CustomerContext);
-    const [items] = useContext(ItemContext);
+    const customers = useSelector((state: RootState) => state.customers.customers);
+    const items = useSelector((state: RootState) => state.items.items);
 
     return (
         <div className="dashboard-container">
