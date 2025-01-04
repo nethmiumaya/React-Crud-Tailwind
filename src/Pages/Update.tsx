@@ -1,22 +1,23 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
-import { CustomerContext } from "../store/CustomerProvider.tsx";
-import { ItemContext } from "../store/ItemProvider.tsx";
-import { Customer } from "../model/Customer.ts";
-import { Item } from "../model/Item.ts";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import { updateCustomer } from "../reducers/CustomerSlice.ts";
+import { updateItem } from "../reducers/ItemSlice.ts";
 import './Update.css';
 
 export function Update() {
     const navigate = useNavigate();
-    const [customers, customerDispatch] = useContext(CustomerContext);
-    const [items, itemDispatch] = useContext(ItemContext);
+    const dispatch = useDispatch();
+    const customers = useSelector((state: RootState) => state.customers.customers);
+    const items = useSelector((state: RootState) => state.items.items);
 
-    const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
+    const [selectedCustomerEmail, setSelectedCustomerEmail] = useState("");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
 
-    const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+    const [selectedItemName, setSelectedItemName] = useState("");
     const [itemName, setItemName] = useState("");
     const [itemDescription, setItemDescription] = useState("");
     const [itemPrice, setItemPrice] = useState("");
@@ -24,7 +25,7 @@ export function Update() {
     function handleCustomerSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
         const customer = customers.find(c => c.email === event.target.value);
         if (customer) {
-            setSelectedCustomer(customer);
+            setSelectedCustomerEmail(customer.email);
             setName(customer.name);
             setEmail(customer.email);
             setPhone(customer.phone);
@@ -34,7 +35,7 @@ export function Update() {
     function handleItemSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
         const item = items.find(i => i.name === event.target.value);
         if (item) {
-            setSelectedItem(item);
+            setSelectedItemName(item.name);
             setItemName(item.name);
             setItemDescription(item.description);
             setItemPrice(item.price);
@@ -42,17 +43,17 @@ export function Update() {
     }
 
     function handleCustomerUpdate() {
-        if (selectedCustomer) {
-            const updatedCustomer = new Customer(name, email, phone);
-            customerDispatch({ type: 'UPDATE_CUSTOMER', payload: updatedCustomer });
+        if (selectedCustomerEmail) {
+            const updatedCustomer = { name, email, phone };
+            dispatch(updateCustomer(updatedCustomer));
             navigate('/');
         }
     }
 
     function handleItemUpdate() {
-        if (selectedItem) {
-            const updatedItem = new Item(itemName, itemDescription, itemPrice);
-            itemDispatch({ type: 'UPDATE_ITEM', payload: updatedItem });
+        if (selectedItemName) {
+            const updatedItem = { name: itemName, description: itemDescription, price: itemPrice };
+            dispatch(updateItem(updatedItem));
             navigate('/');
         }
     }
@@ -64,13 +65,13 @@ export function Update() {
                     <header className="form-header">Update Customer</header>
                     <select onChange={handleCustomerSelectChange} className="form-input">
                         <option value="">Select a customer</option>
-                        {customers.map((customer, index) => (
-                            <option key={index} value={customer.email}>
+                        {customers.map((customer) => (
+                            <option key={customer.email} value={customer.email}>
                                 {customer.name} ({customer.email})
                             </option>
                         ))}
                     </select>
-                    {selectedCustomer && (
+                    {selectedCustomerEmail && (
                         <>
                             <input
                                 type="text"
@@ -103,13 +104,13 @@ export function Update() {
                     <header className="form-header">Update Item</header>
                     <select onChange={handleItemSelectChange} className="form-input">
                         <option value="">Select an item</option>
-                        {items.map((item, index) => (
-                            <option key={index} value={item.name}>
+                        {items.map((item) => (
+                            <option key={item.name} value={item.name}>
                                 {item.name}
                             </option>
                         ))}
                     </select>
-                    {selectedItem && (
+                    {selectedItemName && (
                         <>
                             <input
                                 type="text"

@@ -1,23 +1,26 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
-import { CustomerContext } from "../store/CustomerProvider.tsx";
-import { ItemContext } from "../store/ItemProvider.tsx";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import { deleteCustomer } from "../reducers/CustomerSlice.ts";
+import { deleteItem } from "../reducers/ItemSlice.ts";
 import './Delete.css';
 
 export function Delete() {
     const navigate = useNavigate();
-    const [customers, customerDispatch] = useContext(CustomerContext);
-    const [items, itemDispatch] = useContext(ItemContext);
+    const dispatch = useDispatch();
+    const customers = useSelector((state: RootState) => state.customers.customers);
+    const items = useSelector((state: RootState) => state.items.items);
     const [selectedCustomerEmail, setSelectedCustomerEmail] = useState("");
     const [selectedItemName, setSelectedItemName] = useState("");
 
     function handleCustomerDelete() {
-        customerDispatch({ type: 'DELETE_CUSTOMER', payload: { email: selectedCustomerEmail } });
+        dispatch(deleteCustomer(selectedCustomerEmail));
         navigate('/');
     }
 
     function handleItemDelete() {
-        itemDispatch({ type: 'DELETE_ITEM', payload: { name: selectedItemName } });
+        dispatch(deleteItem(selectedItemName));
         navigate('/');
     }
 
@@ -28,8 +31,8 @@ export function Delete() {
                     <header className="form-header">Delete Customer</header>
                     <select onChange={(e) => setSelectedCustomerEmail(e.target.value)} className="form-input">
                         <option value="">Select a customer</option>
-                        {customers.map((customer, index) => (
-                            <option key={index} value={customer.email}>
+                        {customers.map((customer) => (
+                            <option key={customer.email} value={customer.email}>
                                 {customer.name} ({customer.email})
                             </option>
                         ))}
@@ -42,8 +45,8 @@ export function Delete() {
                     <header className="form-header">Delete Item</header>
                     <select onChange={(e) => setSelectedItemName(e.target.value)} className="form-input">
                         <option value="">Select an item</option>
-                        {items.map((item, index) => (
-                            <option key={index} value={item.name}>
+                        {items.map((item) => (
+                            <option key={item.name} value={item.name}>
                                 {item.name}
                             </option>
                         ))}
