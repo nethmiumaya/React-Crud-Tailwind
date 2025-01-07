@@ -2,33 +2,39 @@
 <a id="readme-top"></a>
 <div align="center">
   <h2 align="center">React CRUD with Redux</h2>
-
-  <p align="center">
-    The <strong>React CRUD with Redux</strong> project is a frontend application designed to perform CRUD operations using Redux for state management. It is built using <strong>TypeScript, JavaScript, React, and Tailwind CSS</strong>.
-  </p>
 </div>
+The `React-Crud-Tailwind` project is a frontend application built using React, TypeScript, JavaScript, and Tailwind CSS. It is designed to perform CRUD (Create, Read, Update, Delete) operations with state management handled using both Redux and a custom reducer. The project is divided into two branches: `redux` and `reducer`.
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#license">License</a></li>
-  </ol>
-</details>
+## Redux Branch
 
+The `redux` branch utilizes Redux Toolkit for state management. Redux is a predictable state container for JavaScript apps, which helps manage the application state in a more structured and scalable way.
+
+### Key Features:
+- **CRUD Operations**: Perform Create, Read, Update, and Delete operations.
+- **Redux State Management**: Efficient state management using Redux Toolkit.
+- **Responsive Design**: Built with Tailwind CSS to ensure a modern and responsive user interface.
+
+### Technologies Used:
+- React
+- TypeScript
+- JavaScript
+- Redux
+- Tailwind CSS
+
+## Reducer Branch
+
+The `reducer` branch uses a custom reducer for state management. This approach leverages React's `useReducer` hook to manage the application state locally within the component.
+
+### Key Features:
+- **CRUD Operations**: Perform Create, Read, Update, and Delete operations.
+- **Custom Reducer State Management**: State management using React's `useReducer` hook.
+- **Responsive Design**: Built with Tailwind CSS to ensure a modern and responsive user interface.
+
+### Technologies Used:
+- React
+- TypeScript
+- JavaScript
+- Tailwind CSS
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
